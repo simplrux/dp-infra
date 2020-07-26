@@ -47,5 +47,7 @@ export class AppComponent implements OnInit {
 
   onEditComplete($event) {
     this.data.values[$event.index] = $event.rowData;
+    // new data
+    console.log('new data:', this.data.values);
   }
 }
