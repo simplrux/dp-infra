@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
-import { InfraComponent } from './infra.component';
-import {TableModule} from 'primeng/table';
+import { TableComponent } from './table/table.component';
+import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DpInputNumberComponent } from './dp-input-number/dp-input-number/dp-input-number.component';
+import { CellComponent } from './cell/cell.component';
+import { NumberComponent } from './inputs/number/number.component';
+import { CheckboxComponent } from './inputs/checkbox/checkbox.component';
 
 @NgModule({
-  declarations: [InfraComponent, DpInputNumberComponent],
+  declarations: [TableComponent, CellComponent, NumberComponent, CheckboxComponent],
   imports: [
     TableModule,
     CommonModule,
     FormsModule
   ],
-  exports: [InfraComponent]
+  exports: [TableComponent]
 })
 export class InfraModule { }

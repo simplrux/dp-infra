@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InfraComponent } from './table/table.component';
+import { NumberComponent } from './number.component';
 
-describe('InfraComponent', () => {
-  let component: InfraComponent;
-  let fixture: ComponentFixture<InfraComponent>;
+describe('NumberComponent', () => {
+  let component: NumberComponent;
+  let fixture: ComponentFixture<NumberComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfraComponent ]
+      declarations: [ NumberComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InfraComponent);
+    fixture = TestBed.createComponent(NumberComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

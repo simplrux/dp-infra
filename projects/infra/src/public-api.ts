@@ -3,5 +3,5 @@
  */
 
 export * from './lib/infra.service';
-export * from './lib/infra.component';
+export * from './lib/table/table.component';
 export * from './lib/infra.module';

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DpInputNumberComponent } from './dp-input-number.component';
+import { CellComponent } from './cell.component';
 
-describe('DpInputNumberComponent', () => {
-  let component: DpInputNumberComponent;
-  let fixture: ComponentFixture<DpInputNumberComponent>;
+describe('CellComponent', () => {
+  let component: CellComponent;
+  let fixture: ComponentFixture<CellComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DpInputNumberComponent ]
+      declarations: [ CellComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DpInputNumberComponent);
+    fixture = TestBed.createComponent(CellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

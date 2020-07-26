@@ -1,0 +1,24 @@
+<p-cellEditor *ngIf="col.edit else noEdit">
+  <ng-template pTemplate="input">
+
+    <dp-number [rowData]="rowData" (inputBlur)="onColumnEditComplete($event, index)" 
+    [col]="col"
+     *ngIf="col.type === 'numInput'">
+    </dp-number>
+
+    <input type="text" *ngIf="col.type === 'textInput'" (blur)="onColumnEditComplete(rowData, index)"
+      [(ngModel)]="rowData[col.field]" [name]="rowData[col.field] + index" />
+      
+  </ng-template>
+  <ng-template pTemplate="output" *ngIf="col.type !== 'checkbox'">
+    {{rowData[col.field]}}
+  </ng-template>
+</p-cellEditor>
+<ng-template #noEdit>
+  <span *ngIf="col.type !== 'checkbox'">
+    {{rowData[col.field]}}
+  </span>
+</ng-template>
+
+<input type="checkbox" [disabled]="!col.edit" *ngIf="col.type === 'checkbox'"
+  (blur)="onColumnEditComplete(rowData, index)" [(ngModel)]="rowData[col.field]" />

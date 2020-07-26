@@ -1,0 +1,30 @@
+<p-table dataKey="id" [paginator]="config.pagination"
+[rows]="config.rows" [editMode]="'row'"
+[columns]="data.cols" [value]="data.values">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th
+        pReorderableColumn
+        [pSortableColumn]="col.field"
+        pResizableColumn
+        *ngFor="let col of columns"
+      >
+        {{ col.header }}
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-columns="columns"
+    let-index="rowIndex"
+    let-rowData
+  >
+    <tr [pReorderableRow]="index" [pEditableColumn]="rowData">
+      <td *ngFor="let col of columns">
+      <dp-cell [index]="index" (editComplete)="onColumnEditComplete($event)" [rowData]="rowData" [col]="col"></dp-cell>
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>
