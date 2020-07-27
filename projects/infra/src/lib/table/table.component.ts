@@ -13,6 +13,8 @@ import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } fro
 export class TableComponent implements OnInit {
   @Input() data: any = {};
   @Input() config: any = {};
+  clonedData = {};
+
   constructor() { }
   @Output() editComplete: EventEmitter<any> = new EventEmitter();
 
@@ -20,9 +22,22 @@ export class TableComponent implements OnInit {
 
   }
 
-  onColumnEditComplete($event) {
-    const index = $event.index;
-    const rowData = $event.rowData;
-    this.editComplete.emit({ index, rowData });
+  onEditComplete($event) {
+    console.log($event);
+    // const index = $event.index;
+    // const rowData = $event.rowData;
+    // this.editComplete.emit({ index, rowData });
+  }
+
+  onRowEditInit(rowData) {
+    this.clonedData[rowData[this.config.dataKey]] = { ...rowData };
+  }
+
+  onRowEditSave(rowData) {
+  }
+
+  onRowEditCancel(rowData, index: number) {
+    this.data.values[index] = this.clonedData[rowData[this.config.dataKey]];
+    delete this.clonedData[rowData[this.config.dataKey]];
   }
 }

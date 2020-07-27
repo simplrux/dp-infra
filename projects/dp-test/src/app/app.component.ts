@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './core/services/data.service';
 
-interface Column {
-  field: string; header: string; disabled?: boolean; edit?: boolean; type?: string; inputConfig?: object;
+class Column {
+  field: string;
+  header: string;
+  disabled?: boolean;
+  edit?: boolean;
+  type?: string;
+  inputConfig?: object;
+  styles?: object;
 }
 interface Data {
   cols: Column[];
@@ -12,6 +18,8 @@ interface Config {
   editable: boolean;
   pagination: boolean;
   rows: number;
+  editMode?: string;
+  dataKey?: string;
 }
 @Component({
   selector: 'app-root',
@@ -24,15 +32,18 @@ export class AppComponent implements OnInit {
   data: Data;
   config: Config;
   ngOnInit() {
+
+    // you can to also use classes instead of interfaces - your choice.
+
     this.ds.getCarsMedium().then(cars => {
       this.data = {
         cols: [
           {
             field: 'vin', header: 'Vin', type: 'textInput', edit: true
           },
-          { field: 'year', header: 'Year', type: 'numInput', edit: true, inputConfig: { currency: '$' } },
+          { field: 'year', header: 'Year', type: 'numInput', edit: false, inputConfig: { currency: '$' }, styles: { color: 'blue' } },
           { field: 'brand', header: 'Brand', type: 'checkbox', edit: true },
-          { field: 'color', header: 'Color' }
+          { field: 'color', header: 'Color', edit: true }
         ],
         values: cars
       };
@@ -40,14 +51,18 @@ export class AppComponent implements OnInit {
 
     this.config = {
       editable: false,
-      pagination: false,
-      rows: 1,
+      pagination: true,
+      rows: 20,
+      editMode: 'row',
+      dataKey: 'vin'
     };
+
   }
 
   onEditComplete($event) {
-    this.data.values[$event.index] = $event.rowData;
+    // this.data.values[$event.index] = $event.rowData;
     // new data
     console.log('new data:', this.data.values);
   }
+
 }

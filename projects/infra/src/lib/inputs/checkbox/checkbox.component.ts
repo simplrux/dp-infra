@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'dp-checkbox',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkbox.component.scss']
 })
 export class CheckboxComponent implements OnInit {
+
+  @Input() rowData: any;
+  @Input() col: any;
+  @Output() inputChange: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 

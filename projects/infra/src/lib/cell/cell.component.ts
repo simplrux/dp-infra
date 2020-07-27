@@ -9,7 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 export class CellComponent implements OnInit {
   @Input() rowData: any;
   @Input() col: any;
-  @Input() index: any;
+  @Input() dataKey: string;
   @Output() editComplete: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
@@ -19,6 +19,7 @@ export class CellComponent implements OnInit {
 
   onColumnEditComplete(rowData, index) {
     this.editComplete.emit({ index, rowData });
+    console.log('cell component output:', rowData);
   }
 
 }

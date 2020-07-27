@@ -1,30 +1,56 @@
-<p-table dataKey="id" [paginator]="config.pagination"
-[rows]="config.rows" [editMode]="'row'"
-[columns]="data.cols" [value]="data.values">
-  <ng-template pTemplate="header" let-columns>
+<p-table [paginator]="config.pagination" [rows]="config.rows" [dataKey]="config.editMode === 'row'? config.dataKey: '' "
+  [editMode]="config.editMode === 'row'? 'row': ''" [columns]="data.cols" [value]="data.values">
+  <ng-template pTemplate="header" let-columns let-editing="editing">
     <tr>
-      <th
-        pReorderableColumn
-        [pSortableColumn]="col.field"
-        pResizableColumn
-        *ngFor="let col of columns"
-      >
+      <th [ngStyle]="col.styles" *ngFor="let col of columns">
         {{ col.header }}
       </th>
+      <th *ngIf="config.editMode === 'row'">
+        Edit
+      </th>
+
     </tr>
   </ng-template>
 
-  <ng-template
-    pTemplate="body"
-    let-columns="columns"
-    let-index="rowIndex"
-    let-rowData
-  >
-    <tr [pReorderableRow]="index" [pEditableColumn]="rowData">
+  <ng-template pTemplate="body" let-columns="columns" let-editing="editing" let-ri="rowIndex" let-rowData>
+
+    <tr *ngIf="config.editMode === 'row' else default" [pEditableRow]="rowData">
+
+      <!-- we need to pass the datakey into the cell component 
+        to prevent cell-editor rendering on the key itself -->
+
       <td *ngFor="let col of columns">
-      <dp-cell [index]="index" (editComplete)="onColumnEditComplete($event)" [rowData]="rowData" [col]="col"></dp-cell>
+        <dp-cell [dataKey]="config.dataKey" [rowData]="rowData" [col]="col"></dp-cell>
       </td>
+
+      <td>
+        <button *ngIf="!editing" (click)="onRowEditInit(rowData)" pButton type="button" pInitEditableRow>Edit</button>
+        <button *ngIf="editing" pButton type="button" pSaveEditableRow>Save</button>
+        <button *ngIf="editing" (click)="onRowEditCancel(rowData, ri)" pButton type="button" pCancelEditableRow>Cancel</button>
+      </td>
+
     </tr>
+
+    <ng-template #default>
+      <tr>
+
+        <ng-container *ngFor="let col of columns">
+
+          <td *ngIf="col.edit" pEditableColumn>
+            <dp-cell [rowData]="rowData" [col]="col"></dp-cell>
+          </td>
+
+          <td *ngIf="!col.edit">
+            <dp-cell [rowData]="rowData" [col]="col"></dp-cell>
+          </td>
+
+        </ng-container>
+
+      </tr>
+
+    </ng-template>
+
+
   </ng-template>
 
 </p-table>

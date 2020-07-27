@@ -9,7 +9,7 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getCarsMedium() {
-    return this.http.get<any>('assets/cars.json')
+    return this.http.get<any>('assets/cars_large.json')
       .toPromise()
       .then(res => res.data)
       .then(data => data);

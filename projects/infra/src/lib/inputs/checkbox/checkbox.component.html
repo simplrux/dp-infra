@@ -1,1 +1,1 @@
-<p>checkbox works!</p>
+<input type="checkbox" [disabled]="!col.edit" (change)="inputChange.emit(rowData)" [(ngModel)]="rowData[col.field]" />

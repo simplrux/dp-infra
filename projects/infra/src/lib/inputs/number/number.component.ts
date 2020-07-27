@@ -16,7 +16,7 @@ export class NumberComponent implements OnInit {
   ngOnInit(): void {
     if (this.col.inputConfig) {
       this.inputConfig = this.col.inputConfig;
-      console.log(this.inputConfig);
+      console.log('number input config:', this.inputConfig);
     }
   }
 
